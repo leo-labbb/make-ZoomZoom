@@ -1,3 +1,3 @@
-# like-a-zoom
+# make-Zoom
 - Javascript & Node js를 이용해 Zoom 클론코딩하기
 - With WebSockets, SocketIO, WebRTC 🌊
