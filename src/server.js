@@ -1,6 +1,7 @@
-import exp from 'constants';
 import express from 'express';
 import path from 'path';
+import http from 'http';
+import WebSocket, { WebSocketServer } from 'ws';
 
 const __dirname = path.resolve();
 const app = express();
@@ -14,4 +15,8 @@ app.get('/*', (req, res) => res.redirect('/'));
 
 const handleListen = () =>
   console.log('💥 Listening on http://localhost:3000 💥');
-app.listen(3000, handleListen);
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+
+server.listen(3000, handleListen);
