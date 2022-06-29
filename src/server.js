@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
 import http from 'http';
-import WebSocket, { WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
+import { SocketAddress } from 'net';
 
 const __dirname = path.resolve();
 const app = express();
@@ -19,15 +20,19 @@ const handleListen = () =>
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
+const sockets = [];
+
 wss.on('connection', socket => {
+  sockets.push(socket);
   console.log('Connected to Browser :)');
   socket.on('close', () => {
     console.log('Disconnected from Browser');
   });
   socket.on('message', message => {
-    console.log(message.toString());
+    sockets.forEach(aSocket => {
+      aSocket.send(message.toString());
+    });
   });
-  socket.send('hello!!');
 });
 
 server.listen(3000, handleListen);
