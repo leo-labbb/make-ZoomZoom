@@ -10,8 +10,11 @@ html(lang="en")
         header 
             h1 ZoomZoom
         main
+            form#nick
+                input(type="text", placeholder="choose your nickname", required)
+                button Save
             ul
-            form
-                input(type="text", placeholder="write a message", required)
+            form#message
+                input(type="text", placeholder="write a message!", required)
                 button Send
         script(src="/public/js/app.js")
