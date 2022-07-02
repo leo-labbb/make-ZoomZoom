@@ -26,6 +26,7 @@ function handleSubmit(event) {
   event.preventDefault();
   const input = messageForm.querySelector('input');
   socket.send(makeMessage('new_message', input.value));
+  console.log('input.value:', input.value);
   input.value = '';
 }
 
