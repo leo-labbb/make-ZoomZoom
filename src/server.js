@@ -24,6 +24,7 @@ const handleListen = () =>
 
 wsServer.on('connection', socket => {
   console.log(socket);
+  console.log(socket);
 });
 
 httpServer.listen(3000, handleListen);
