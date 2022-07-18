@@ -30,7 +30,13 @@ wsServer.on('connection', socket => {
     socket.join(roomName);
     done();
     wsServer.to(roomName).emit('welcome');
-    console.log(roomName);
+  });
+  socket.on('disconnecting', () => {
+    socket.rooms.forEach(room => socket.to(room).emit('bye'));
+  });
+  socket.on('new_message', (msg, room, done) => {
+    socket.to(room).emit('new_message', msg);
+    done();
   });
 });
 
