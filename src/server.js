@@ -22,6 +22,21 @@ const wsServer = new Server(httpServer);
 const handleListen = () =>
   console.log('💥 Listening on http://localhost:3000 💥');
 
+function publicRooms() {
+  const {
+    sockets: {
+      adapter: { sids, rooms },
+    },
+  } = wsServer;
+  const publicRooms = [];
+  rooms.forEach((_, key) => {
+    if (sids.get(key) === undefined) {
+      publicRooms.push(key);
+    }
+  });
+  return publicRooms;
+}
+
 wsServer.on('connection', socket => {
   socket['nickname'] = 'Anonymous';
   socket.onAny(event => {
