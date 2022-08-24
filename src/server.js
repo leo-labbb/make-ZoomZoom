@@ -57,6 +57,7 @@ wsServer.on('connection', socket => {
   socket.on('nickname', nickname => {
     socket['nickname'] = nickname;
   });
+  console.log('test');
 });
 
 httpServer.listen(3000, handleListen);
